@@ -1,0 +1,52 @@
+package pkg;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Wappalyzer {
+	
+	WebDriver driver;
+	
+	@Before
+	public void setup()
+	{
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
+	}
+	@Test
+	public void task() throws Exception
+	{
+		driver.get("https://www.wappalyzer.com");
+		driver.manage().window().maximize();
+		driver.findElement(By.xpath("//*[@id=\"app\"]/div/main/div/div[1]/header/div/div/div/div[2]/button[2]/span")).click();
+		driver.findElement(By.xpath("//*[@id=\"list-item-49\"]/div/div[1]")).click();
+		Thread.sleep(5000);
+		
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("window.scrollBy(0,500)");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.xpath("//*[@id=\"app\"]/div/main/div/div[2]/div[2]/div/div[2]/div[2]/div/div/div/div/div[1]/div[1]")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//*[@id=\"input-584\"]")).sendKeys("ecommerce");
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//*[@id=\"list-item-581-0\"]/div/div[1]")).click();
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//*[@id=\"app\"]/div/main/div/div[2]/div[1]/div[2]/div/div[2]/div[2]/div/div/a/span")).click();
+		
+		
+	}
+	@After
+	public void close()
+	{
+		driver.quit();
+	}
+	
+	
+}
